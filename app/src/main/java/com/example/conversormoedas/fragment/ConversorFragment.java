@@ -166,7 +166,7 @@ public class ConversorFragment extends Fragment {
     public void buscarMoedas() {
 
         MoedaService moedaService = retrofit.create(MoedaService.class);
-        Call<Object> call = moedaService.getMoedas("only_results", "e9645ae7");
+        Call<Object> call = moedaService.getMoedas("only_results", "#######");
 
         call.enqueue(new Callback<Object>() {
             @Override
