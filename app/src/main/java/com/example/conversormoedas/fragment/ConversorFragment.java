@@ -79,11 +79,9 @@ public class ConversorFragment extends Fragment {
     }
 
     // Ouvinte EditsText
-    private void configEditsText(){
+    private void configEditsText() {
 
-        TextWatcher textWatcher;
-
-        editReal.addTextChangedListener(new TextWatcher() {
+        TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -92,56 +90,75 @@ public class ConversorFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                String realString = editReal.getText().toString();
-                if(!realString.isEmpty()){
-                    real = Double.parseDouble(realString);
-
-                    editReal.addTextChangedListener(textWatcher);
-
-                    editDolar.setText(nf.format(real / dolar));
-                    //editEuro.setText(nf.format(real / euro));
-                }else {
-                    editDolar.setText("");
-                    //editEuro.setText("");
-                }
-
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
+                if(s == editReal.getEditableText()){
+
+                    editDolar.removeTextChangedListener(this);
+                    editEuro.removeTextChangedListener(this);
+
+                    String realString = editReal.getText().toString();
+                    if (!realString.isEmpty()) {
+                        double r = Double.parseDouble(realString);
+
+                        editDolar.setText(nf.format(r / dolar));
+                        editEuro.setText(nf.format(r / euro));
+                    } else {
+                        editDolar.setText("");
+                        editEuro.setText("");
+                    }
+
+                    editDolar.addTextChangedListener(this);
+                    editEuro.addTextChangedListener(this);
+
+                }else if(s == editDolar.getEditableText()){
+
+                    editReal.removeTextChangedListener(this);
+                    editEuro.removeTextChangedListener(this);
+
+                    String dolarString = editDolar.getText().toString();
+                    if (!dolarString.isEmpty()) {
+                        double d = Double.parseDouble(dolarString);
+
+                        editReal.setText(nf.format(d * dolar));
+                        editEuro.setText(nf.format((d * dolar) / euro));
+                    } else {
+                        editReal.setText("");
+                        editEuro.setText("");
+                    }
+
+                    editReal.addTextChangedListener(this);
+                    editEuro.addTextChangedListener(this);
+
+                }else {
+                    editReal.removeTextChangedListener(this);
+                    editDolar.removeTextChangedListener(this);
+
+                    String euroString = editEuro.getText().toString();
+                    if (!euroString.isEmpty()) {
+                        double e = Double.parseDouble(euroString);
+
+                        editReal.setText(nf.format(e * euro));
+                        editDolar.setText(nf.format((e * dolar) / euro));
+                    } else {
+                        editReal.setText("");
+                        editDolar.setText("");
+                    }
+
+                    editReal.addTextChangedListener(this);
+                    editDolar.addTextChangedListener(this);
+                }
+
             }
-        });
 
-//        editDolar.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//                String dolarString = editDolar.getText().toString();
-//                if(!dolarString.isEmpty()){
-//                    double d = Double.parseDouble(dolarString);
-//
-//                    editReal.setText(nf.format(d * dolar));
-//                    editEuro.setText(nf.format(d / euro));
-//                }else {
-//                    editReal.setText("");
-//                    editEuro.setText("");
-//                }
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
+        };
 
+        editReal.addTextChangedListener(textWatcher);
+        editDolar.addTextChangedListener(textWatcher);
+        editEuro.addTextChangedListener(textWatcher);
 
     }
 
@@ -188,7 +205,7 @@ public class ConversorFragment extends Fragment {
     }
 
     // Inicia componentes de tela
-    private void iniciaComponentes(View view){
+    private void iniciaComponentes(View view) {
         editReal = view.findViewById(R.id.editReal);
         editDolar = view.findViewById(R.id.editDolar);
         editEuro = view.findViewById(R.id.editEuro);
