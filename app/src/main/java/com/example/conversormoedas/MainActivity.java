@@ -1,6 +1,7 @@
 package com.example.conversormoedas;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -15,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private SmartTabLayout smartTabLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.conversormoedas.R;
 import com.example.conversormoedas.api.MoedaService;
+import com.example.conversormoedas.api.RetrofitConfig;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -44,7 +45,6 @@ public class ConversorFragment extends Fragment {
 
     private Retrofit retrofit;
 
-    private double real = 0;
     private double dolar = 0;
     private double euro = 0;
 
@@ -66,7 +66,7 @@ public class ConversorFragment extends Fragment {
         iniciaComponentes(view);
 
         // Inicia serviço Retrofit
-        iniciaRetrofit();
+        retrofit = RetrofitConfig.getRetrofit();
 
         // Recupera as moedas
         buscarMoedas();
@@ -193,15 +193,6 @@ public class ConversorFragment extends Fragment {
             }
         });
 
-    }
-
-    // Inicia serviço Retrofit
-    private void iniciaRetrofit() {
-        retrofit = new Retrofit
-                .Builder()
-                .baseUrl("https://api.hgbrasil.com/finance/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
     }
 
     // Inicia componentes de tela

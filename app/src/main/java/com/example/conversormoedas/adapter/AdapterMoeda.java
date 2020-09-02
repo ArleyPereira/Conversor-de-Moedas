@@ -1,5 +1,6 @@
 package com.example.conversormoedas.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.conversormoedas.R;
 import com.example.conversormoedas.model.Moeda;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class AdapterMoeda extends RecyclerView.Adapter<AdapterMoeda.MyViewHolder> {
 
@@ -31,6 +36,17 @@ public class AdapterMoeda extends RecyclerView.Adapter<AdapterMoeda.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
+        NumberFormat nf = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR")));
+
+        Moeda moeda = moedaList.get(position);
+        holder.textMoeda.setText(moeda.getName());
+        holder.textValorCompra.setText("R$ " + nf.format(moeda.getBuy()));
+        holder.textValorVenda.setText("R$ " + nf.format(moeda.getSell()));
+
+        Log.i("INFOTESTE", "textValorCompra: " + nf.format(moeda.getBuy()));
+        Log.i("INFOTESTE", "textValorVenda: " + nf.format(moeda.getSell()));
+        Log.i("INFOTESTE", "------------------------------------------------");
+
     }
 
     @Override
@@ -44,6 +60,9 @@ public class AdapterMoeda extends RecyclerView.Adapter<AdapterMoeda.MyViewHolder
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            textMoeda = itemView.findViewById(R.id.textMoeda);
+            textValorCompra = itemView.findViewById(R.id.textValorCompra);
+            textValorVenda = itemView.findViewById(R.id.textValorVenda);
         }
     }
 
