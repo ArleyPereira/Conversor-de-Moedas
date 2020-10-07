@@ -43,10 +43,6 @@ public class AdapterMoeda extends RecyclerView.Adapter<AdapterMoeda.MyViewHolder
         holder.textValorCompra.setText("R$ " + nf.format(moeda.getBuy()));
         holder.textValorVenda.setText("R$ " + nf.format(moeda.getSell()));
 
-        Log.i("INFOTESTE", "textValorCompra: " + nf.format(moeda.getBuy()));
-        Log.i("INFOTESTE", "textValorVenda: " + nf.format(moeda.getSell()));
-        Log.i("INFOTESTE", "------------------------------------------------");
-
     }
 
     @Override
