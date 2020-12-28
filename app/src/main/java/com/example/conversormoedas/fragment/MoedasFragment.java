@@ -33,7 +33,7 @@ import retrofit2.Retrofit;
 public class MoedasFragment extends Fragment {
 
     private AdapterMoeda adapterMoeda;
-    private List<Moeda> moedaList = new ArrayList<>();
+    private final List<Moeda> moedaList = new ArrayList<>();
     private RecyclerView rvMoedas;
     private ProgressBar progressBar;
     private TextView textInfo;
@@ -77,7 +77,6 @@ public class MoedasFragment extends Fragment {
 
     // Realiza a chamada da busca
     public void buscarMoedas() {
-
         MoedaService moedaService = retrofit.create(MoedaService.class);
         Call<Object> call = moedaService.getMoedas("only_results", "e9645ae7");
 

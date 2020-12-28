@@ -1,4 +1,4 @@
-package com.example.conversormoedas;
+package com.example.conversormoedas.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
+import com.example.conversormoedas.R;
 import com.example.conversormoedas.fragment.ConversorFragment;
 import com.example.conversormoedas.fragment.MoedasFragment;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;

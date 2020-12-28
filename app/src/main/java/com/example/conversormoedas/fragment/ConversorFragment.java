@@ -59,7 +59,6 @@ public class ConversorFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_conversor, container, false);
 
         // Inicia componentes de tela
-        nf = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR")));
         iniciaComponentes(view);
 
         // Inicia serviço Retrofit
@@ -77,6 +76,7 @@ public class ConversorFragment extends Fragment {
 
     // Ouvinte EditsText
     private void configEditsText() {
+        nf = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR")));
 
         TextWatcher textWatcher = new TextWatcher() {
             @Override
@@ -156,12 +156,10 @@ public class ConversorFragment extends Fragment {
         editReal.addTextChangedListener(textWatcher);
         editDolar.addTextChangedListener(textWatcher);
         editEuro.addTextChangedListener(textWatcher);
-
     }
 
     // Realiza a chamada da busca
     public void buscarMoedas() {
-
         MoedaService moedaService = retrofit.create(MoedaService.class);
         Call<Object> call = moedaService.getMoedas("only_results", "#######");
 
@@ -189,7 +187,6 @@ public class ConversorFragment extends Fragment {
 
             }
         });
-
     }
 
     // Inicia componentes de tela
